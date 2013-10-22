@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2D62C36F-8315-4317-9C19-047D0E948086}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAccess</RootNamespace>
+    <AssemblyName>DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\MTU Service\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\x64\Debug\MTU Service\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\x64\Release\MTU Service\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GotDotNet.ApplicationBlocks.Data">
+      <HintPath>..\Refrence\GotDotNet.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.65.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refrence\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlertDataExportQueueSaver.cs" />
+    <Compile Include="CacheContainer.cs" />
+    <Compile Include="CollectionDataQueueSaver.cs" />
+    <Compile Include="ConvertData.cs" />
+    <Compile Include="DbConnectionMonitor.cs" />
+    <Compile Include="EntityAssembler.cs" />
+    <Compile Include="FileSplitUnit.cs" />
+    <Compile Include="FolderNames.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Interfaces\IRedoCollectionData.cs" />
+    <Compile Include="Interfaces\IServiceLogRepsitory.cs" />
+    <Compile Include="Interfaces\ISettingRepository.cs" />
+    <Compile Include="Helpers\FileDiskHelper.cs" />
+    <Compile Include="Helpers\SqliteConnectionHelper.cs" />
+    <Compile Include="Interfaces\ICheckConnection.cs" />
+    <Compile Include="Interfaces\ICollectionDataRepository.cs" />
+    <Compile Include="Interfaces\IMeasureDataBackupRepository.cs" />
+    <Compile Include="Interfaces\IMeasureDataRepository.cs" />
+    <Compile Include="Interfaces\IAlertDataRepository.cs" />
+    <Compile Include="Interfaces\IAlertDataBackupRepository.cs" />
+    <Compile Include="MeasureDataExportQueueSaver.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositotyTableContentLimit.cs" />
+    <Compile Include="RtuLogDataSaver.cs" />
+    <Compile Include="SQLItems.cs" />
+    <Compile Include="Sqlite\SqliteCollectionDataRepository.cs" />
+    <Compile Include="Sqlite\SqliteRepositoryBase.cs" />
+    <Compile Include="Sqlite\SqliteServicelogRepository.cs" />
+    <Compile Include="Sqlite\SqliteSettingRepository.cs" />
+    <Compile Include="Sqlite\SqliteMeasureDataRepository.cs" />
+    <Compile Include="Sqlite\SqliteAlertDataRepository.cs" />
+    <Compile Include="SqlServer\SqlServerAlertDataExportRepository.cs" />
+    <Compile Include="SqlServer\SqlServerMeasureDataExportRepository.cs" />
+    <Compile Include="SqlServer\SqlServerRepositoryBase.cs" />
+    <Compile Include="SqlServer\SqlServerSettingRepository.cs" />
+    <Compile Include="SqlServer\SqlServerMeasureDataRepository.cs" />
+    <Compile Include="SqlServer\SqlServerAlertDataRepository.cs" />
+    <Compile Include="Text\TextMeasureDataRepository.cs" />
+    <Compile Include="Text\TextAlertDataRepository.cs" />
+    <Compile Include="Text\TextCollectionDataRepository.cs" />
+    <Compile Include="UtilityParameters.cs" />
+    <Compile Include="_Context\ICollectionDataPersistenceContext.cs" />
+    <Compile Include="_Context\IServiceLogPersistenceContext.cs" />
+    <Compile Include="_Context\ISettingPersistenceContext.cs" />
+    <Compile Include="_Context\SqliteCollectionDataPersistenceContext.cs" />
+    <Compile Include="_Context\SqliteServiceLogPersisitenceContext.cs" />
+    <Compile Include="_Context\SqliteSettingPersistenceContext.cs" />
+    <Compile Include="_Context\SqlServerAlertDataExportPersistenceContext.cs" />
+    <Compile Include="_Context\SqlServerMeasureDataExportPersistenceContext.cs" />
+    <Compile Include="_Context\SqlServerSettingPersistenceContext.cs" />
+    <Compile Include="_Context\IMeasureDataPersistenceContext.cs" />
+    <Compile Include="_Context\SqliteMeasureDataPersistenceContext.cs" />
+    <Compile Include="_Context\SqlServerMeasureDataPersistenceContext.cs" />
+    <Compile Include="_Context\TextMeasureDataPersistenceContext.cs" />
+    <Compile Include="_Context\IAlertDataPersistenceContext.cs" />
+    <Compile Include="_Context\SqlServerAlertDataPersistenceContext.cs" />
+    <Compile Include="_Context\SqliteAlertDataPersistenceContext.cs" />
+    <Compile Include="_Context\TextAlertDataPersistenceContext.cs" />
+    <Compile Include="_Context\TextCollectionDataPersistenceContext.cs" />
+    <Compile Include="_Manager\AlertDataExportManager.cs" />
+    <Compile Include="_Manager\CollectionDataManager.cs" />
+    <Compile Include="_Manager\MeasureDataExportManager.cs" />
+    <Compile Include="_Manager\ServiceLogManager.cs" />
+    <Compile Include="_Manager\SettingManager.cs" />
+    <Compile Include="_Manager\MeasureDataManager.cs" />
+    <Compile Include="MeasureDataQueueSaver.cs" />
+    <Compile Include="AlertDataQueueSaver.cs" />
+    <Compile Include="_Manager\AlertDataManager.cs" />
+    <Compile Include="DataPersistErrorEventArgs.cs" />
+    <Compile Include="_Manager\SpecialManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataEntity\DataEntity.csproj">
+      <Project>{15484c68-8160-48ea-a490-c19517a4653e}</Project>
+      <Name>DataEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FunctionLib\FunctionLib.csproj">
+      <Project>{846f2299-3544-45e7-acb1-309fcc561085}</Project>
+      <Name>FunctionLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MtuCommon\MtuCommon.csproj">
+      <Project>{1576ec87-0182-433d-aba5-afb2c3729273}</Project>
+      <Name>MtuCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
