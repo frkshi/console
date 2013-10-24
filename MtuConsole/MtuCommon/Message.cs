@@ -6,6 +6,29 @@ using System.Text;
 namespace MtuConsole.Common
 {
     /// <summary>
+    /// 接收通道抛出消息事件
+    /// </summary>
+    /// <param name="objMessage"></param>
+    public delegate void MtuMessageHandler(Message objMessage);
+
+    public class ServerHost
+    {
+
+        public event MtuMessageHandler SendMsg;
+
+        public ServerHost()
+        {}
+        /// <summary>
+        /// 管理事件触发，界面注册
+        /// </summary>
+        /// <param name="msg"></param>
+        public void Send(Message msg)
+        {
+            SendMsg(msg);
+        }
+    }
+
+    /// <summary>
     /// Enumeration that represents the type of a message
     /// </summary>
     public enum MessageType

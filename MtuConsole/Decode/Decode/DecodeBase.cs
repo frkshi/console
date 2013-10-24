@@ -192,6 +192,7 @@ namespace Decode
             Rtuid = "";
             bool verify = false;
             verify = VerifyData(sCode);
+            verify = true;  //临时调试用
                 if (verify)//verfy
                 {
                     sFrameData sData = TransactData(sCode);

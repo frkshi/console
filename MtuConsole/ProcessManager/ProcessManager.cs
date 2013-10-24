@@ -59,7 +59,12 @@ namespace MtuConsole.ProcessManager
             _servicelog = new MtuLog();
 
         }
-
+        public ServiceControl(ServerHost host)
+        {
+            _host = host;
+            _servicelog=new MtuLog();
+        }
+       
         /// <summary>
         /// 实例化过程
 
@@ -263,7 +268,7 @@ namespace MtuConsole.ProcessManager
         {
             try
             {
-                _host = new ServerHost();
+               // _host = new ServerHost();
 
                 //_host.Start(_rc.ApiPort);
 

@@ -355,15 +355,8 @@ namespace Decode
                     datatype = sDataType.MeasureData;   //检测量信息 
                     break;
                 #endregion
-                #region D_180,D_190,D_1C0,D_1a0:  浮点型,压力数据,DLC数据
-                //case DataTypeNewDLA.D_1a0:
-                    
-                //      GetScaleAndOffset("01", data.TU, out scale, out offset);
-
-                //      scale = 1;
-                      
-
-                //    break;
+                #region D_180:  压力数据
+                
                 case DataTypeDatalog.D_180:  //整型,压力数据
                 
 

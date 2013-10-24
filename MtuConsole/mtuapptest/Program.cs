@@ -12,9 +12,17 @@ namespace mtuapptest
     {
         static void Main(string[] args)
         {
+
+           
             log4net.Config.XmlConfigurator.Configure();
-            ServiceControl testSC = new ServiceControl();
+            MessageCenter msgcenter = new MessageCenter();
+           
+            ServiceControl testSC = new ServiceControl( msgcenter.MessageHost);
+
             testSC.CreateInstance();
+            //msgcenter.RegistHost();
+          
+            
             Console.ReadLine();
             testSC.ExitInstance();
 

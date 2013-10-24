@@ -10,13 +10,7 @@ using MtuConsole.Common;
 namespace MtuConsole.TcpProcess
 {
 
-    public class ServerHost
-    {
-        public void Send(Message msg)
-        { 
-        
-        }
-    }
+   
     /// <summary>
     /// 
     /// TODO:  往界面发送消息
@@ -35,6 +29,9 @@ namespace MtuConsole.TcpProcess
         /// 日志对象
         /// </summary>
         private MtuLog _logger;
+
+        
+
         /// <summary>
         /// 初始化
         /// </summary>
@@ -158,6 +155,7 @@ namespace MtuConsole.TcpProcess
                     {
 
                         _host.Send(msg);
+                       
                         result = true;
 
                     }

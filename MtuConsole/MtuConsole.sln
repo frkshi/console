@@ -25,6 +25,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessManager", "ProcessMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqliteLog", "SqliteLog\SqliteLog.csproj", "{760136BB-1BCF-4956-974C-A8C177655046}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refrence", "Refrence", "{214650BA-744A-4C29-9338-6CDC703B9F1E}"
+	ProjectSection(SolutionItems) = preProject
+		Refrence\clayui_forcsharp.dll = Refrence\clayui_forcsharp.dll
+		Refrence\ExtensionLibrary.dll = Refrence\ExtensionLibrary.dll
+		Refrence\GotDotNet.ApplicationBlocks.Data.dll = Refrence\GotDotNet.ApplicationBlocks.Data.dll
+		Refrence\log4net.dll = Refrence\log4net.dll
+		Refrence\System.Data.SQLite.dll = Refrence\System.Data.SQLite.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A3AD4374-538E-4382-9FBD-9F22DF6960F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
