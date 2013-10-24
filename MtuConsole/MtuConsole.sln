@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MtuConsole", "MtuConsole\MtuConsole.csproj", "{6F0521C4-B5C2-4D14-8E02-4C0588C05C78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpCommunication", "TcpCommunication\TcpCommunication.csproj", "{B0B05ABF-F153-4E6B-B1AB-E5D3C0DE8D68}"
@@ -35,6 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refrence", "Refrence", "{21
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{A3AD4374-538E-4382-9FBD-9F22DF6960F3}"
+	ProjectSection(SolutionItems) = preProject
+		DataBase\DataLogConfig.db3 = DataBase\DataLogConfig.db3
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
