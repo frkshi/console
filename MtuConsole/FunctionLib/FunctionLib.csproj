@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckDigitHelper.cs" />
+    <Compile Include="ConfigurationApp.cs" />
     <Compile Include="ControlHelper.cs" />
     <Compile Include="EnumerableHelper.cs" />
     <Compile Include="HexConversionHelper.cs" />

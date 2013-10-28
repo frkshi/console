@@ -9,6 +9,7 @@ using DataAccess;
 using DataEntity;
 
 using MtuConsole.Common;
+using FunctionLib;
 
 namespace MtuConsole.ProcessManager
 {
@@ -85,40 +86,26 @@ namespace MtuConsole.ProcessManager
                     return false;
                 }
 
-                // oCommandSend = new CommandSend();
-
                 _commandsend = new CommandSend(_rwDatabase);
                 _commandsend.CommandArrived += new CommandMessageHandler(OnCommandArrived);
-                _commandsend.ResetProcessControl += new CommandResetProcessControl(_commandsend_ResetProcessControl);
-
+                _commandsend.ResetProcessControl += new CommandResetProcessControl(Commandsend_ResetProcessControl);
                 _commandLists = new Hashtable();
-
                 InitRTUDataCache();
 
-                if (!InitialAPI())
-                {
-                    return false;
-                }
-
-                //  _commandLists = new List<CommandMsg>();
-
                 TableProcessControl = new Hashtable();
+                if (ConfigureAppConfig.GetAppSettingsKeyValue("communicationenable").ToLower() == "true" ? true : false)
+                {
+                    ProcessControl tempProcessControl = new ProcessControl(1);
+                    tempProcessControl.SetRWobjects(_rwDatabase);
+                    tempProcessControl.SetApiObject(_host);
+                    tempProcessControl.SetCommandLists(_commandLists);
+                    tempProcessControl.SetRTUDataCache(_rtuDataCache);
+                    tempProcessControl.CreateInstance();
 
-                
-                ProcessControl tempProcessControl = new ProcessControl(1);
-                tempProcessControl.SetRWobjects(_rwDatabase);
-                tempProcessControl.SetApiObject(_host);
-                tempProcessControl.SetCommandLists(_commandLists);
-                tempProcessControl.SetRTUDataCache(_rtuDataCache);
-                tempProcessControl.CreateInstance();
-
-                TableProcessControl.Add("key_" + "1", tempProcessControl);
-                
+                    TableProcessControl.Add("key_" + "1", tempProcessControl);
+                }
                 //实例化processcontrol
-                
-
                 _commandsend.ProcessTable = TableProcessControl;
-
                 _servicelog.Info(new LogMessage() { Action = ActionSource.Service, Level = EventLevel.Medium, Message = "服务启动完成" });
 
             }
@@ -130,12 +117,18 @@ namespace MtuConsole.ProcessManager
             }
             return true;
         }
+
+        public RWDatabase Rwdata
+        {
+            get { return _rwDatabase; }
+            set { _rwDatabase = value; }
+        }
         /// <summary>
         /// 开启或关闭指定通道
         /// </summary>
         /// <param name="communicationID"></param>
         /// <param name="enable"></param>
-        void _commandsend_ResetProcessControl(string communicationID, bool enable)
+       public void Commandsend_ResetProcessControl(string communicationID, bool enable)
         {
             try
             {
@@ -260,27 +253,6 @@ namespace MtuConsole.ProcessManager
             return true;
         }
 
-        /// <summary>
-        /// 初始化api组件
-        /// </summary>
-        /// <returns></returns>
-        private bool InitialAPI()
-        {
-            try
-            {
-               // _host = new ServerHost();
-
-                //_host.Start(_rc.ApiPort);
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                _servicelog.Error(e.Message, e);
-                return false;
-            }
-        }
-
         private void InitRTUDataCache()
         {
             _rtuDataCache = new RTUDataCacheDictionary();
@@ -295,7 +267,7 @@ namespace MtuConsole.ProcessManager
         /// api命令到达事件
         /// </summary>
         /// <param name="commMsg"></param>
-        private void OnCommandArrived(CommandMsg commMsg)
+        public void OnCommandArrived(CommandMsg commMsg)
         {
             try
             {

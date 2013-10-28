@@ -252,6 +252,7 @@ namespace MtuConsole.TcpProcess
                         tmpbody.Items = tmpitems;
                         apimsg.Body = tmpbody;
                         msgs.Add(apimsg);
+                        
                         break;
 
 

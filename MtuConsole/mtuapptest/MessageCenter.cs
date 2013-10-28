@@ -21,6 +21,7 @@ namespace mtuapptest
 
         void _host_SendMsg(Message objMessage)
         {
+            
             Console.WriteLine("[MessageCenter]:" + objMessage.ToString());
         }
         public void RegistHost()

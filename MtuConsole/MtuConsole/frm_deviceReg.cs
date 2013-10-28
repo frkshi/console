@@ -27,34 +27,34 @@ namespace MtuConsole
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            IntPtr handle = this.Handle;
-            if (MainParent.IsPlay() == 0)
-            {
-                timer1.Stop();
-                foreach (System.Windows.Forms.Control control in this.Controls)
-                {
-                    MainParent.WinRedraw(control.Handle, 1);
-                }
-                Update();
-            }
-            else
-                MainParent.Redraw(handle, 1);
+            //IntPtr handle = this.Handle;
+            //if (MainParent.IsPlay() == 0)
+            //{
+            //    timer1.Stop();
+            //    foreach (System.Windows.Forms.Control control in this.Controls)
+            //    {
+            //        MainParent.WinRedraw(control.Handle, 1);
+            //    }
+            //    Update();
+            //}
+            //else
+            //    MainParent.Redraw(handle, 1);
         }
 
         private void frm_deviceReg_Shown(object sender, EventArgs e)
         {
-            IntPtr handle = this.Handle;
-            IntPtr handle1 = this.MdiParent.Handle;// m_f1.Handle;
+            //IntPtr handle = this.Handle;
+            //IntPtr handle1 = this.MdiParent.Handle;// m_f1.Handle;
 
-            MainParent.CLAYUI_InitDialog2(handle, handle);
+            //MainParent.CLAYUI_InitDialog2(handle, handle);
 
-            foreach (System.Windows.Forms.Control control in this.Controls)
-            {
-                MainParent.WinRedraw(control.Handle, 0);
-            }
+            //foreach (System.Windows.Forms.Control control in this.Controls)
+            //{
+            //    MainParent.WinRedraw(control.Handle, 0);
+            //}
 
-            this.Location = new Point(0, 0);
-            timer1.Start();
+            //this.Location = new Point(0, 0);
+            //timer1.Start();
         }
 
         protected override void OnPaint(PaintEventArgs e)

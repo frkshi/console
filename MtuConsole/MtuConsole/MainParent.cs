@@ -8,54 +8,92 @@ using System.Text;
 using System.Threading;//.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using log4net;
+using MtuConsole.TcpProcess;
+using MtuConsole.ProcessManager;
+
+using DataAccess;
+using DataEntity;
+using FunctionLib;
 namespace MtuConsole
 {
     public partial class MainParent : Form
     {
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void CLAYUI_CSharp_Init(IntPtr handle);
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void CLAYUI_CSharp_Init(IntPtr handle);
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void CLAYUI_CSharp_Release();
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void CLAYUI_CSharp_Release();
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void CLAYUI_OnAnimation(IntPtr handle, int vert, int flag, int anitype, int invert);
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void CLAYUI_OnAnimation(IntPtr handle, int vert, int flag, int anitype, int invert);
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void Redraw(IntPtr handle, int usetime);
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void Redraw(IntPtr handle, int usetime);
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern int IsPlay();
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern int IsPlay();
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void CLAYUI_InitDialog2(IntPtr handle, IntPtr handle1);
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void CLAYUI_InitDialog2(IntPtr handle, IntPtr handle1);
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void MakeWindowTpt(IntPtr handle, int factor);
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void MakeWindowTpt(IntPtr handle, int factor);
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void WinRedraw(IntPtr handle, int redraw);
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void WinRedraw(IntPtr handle, int redraw);
 
-        [DllImport(@"clayui_forcsharp.dll")]
-        public static extern void desktomemdc1(IntPtr handle);
+        //[DllImport(@"clayui_forcsharp.dll")]
+        //public static extern void desktomemdc1(IntPtr handle);
 
 
         public int m_isredraw = 1;
        
         private Dictionary<string, Form> _forms=new Dictionary<string,Form>();
-        public MainParent()
+
+        private RWDatabase _rwdata;
+        ServiceControl _sc;
+        private bool _communicationenable;
+
+        public bool CommunicationEnable
         {
-            InitializeComponent();
+            get { return _communicationenable; }
+            set { _communicationenable = value; }
         }
 
-        //public void RemoveChildForm(string formname)
-        //{
-        //    if (_forms.ContainsKey(formname))
-        //    {
-        //        _forms.Remove(formname);
-        //    }
-        //}
+
+        public  void EnableCommunication(bool enable)
+        {
+            
+                _sc.Commandsend_ResetProcessControl("1", enable);
+                CommunicationEnable = enable;
+            
+        }
+        public MainParent()
+        {
+            ini();
+            InitializeComponent();
+
+        }
+        
+        private void ini()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+            MessageCenter msgcenter = new MessageCenter();
+
+             _sc = new ServiceControl(msgcenter.MessageHost);
+
+            _sc.CreateInstance();
+            _rwdata = _sc.Rwdata;
+            _communicationenable = ConfigureAppConfig.GetAppSettingsKeyValue("communicationenable").ToLower() == "true" ? true : false;
+            //msgcenter.RegistHost();
+
+
+           
+        }
+
+        
         private Form GetChildForm(string formname)
         {
             Form result = null;
@@ -92,7 +130,7 @@ namespace MtuConsole
             switch (formname)
             {
                 case "frm_MtuSetting":
-                    result = new frm_MtuSetting();
+                    result = new frm_MtuSetting(_rwdata,this);
                  
                     
                     break;
@@ -104,7 +142,6 @@ namespace MtuConsole
                     break;
                 case "frm_DataMonitor":
                     result = new frm_DataMonitor();
-                
                     break;
                 case "frm_CommunicationMonitor":
                     result = new frm_CommunicationMonitor();
@@ -119,13 +156,13 @@ namespace MtuConsole
         }
         private void ShouUI(Form frm)
         {
-            IntPtr handle = this.Handle;
-            IntPtr h1 = (IntPtr)0, h2 = (IntPtr)0;
+            //IntPtr handle = this.Handle;
+            //IntPtr h1 = (IntPtr)0, h2 = (IntPtr)0;
 
-            //frm.WindowState = FormWindowState.Maximized;
-            frm.StartPosition = FormStartPosition.Manual;
-            CLAYUI_OnAnimation((IntPtr)0, 0, 2, 1, 0);
-            MainParent.Redraw(handle, 1);
+            ////frm.WindowState = FormWindowState.Maximized;
+            //frm.StartPosition = FormStartPosition.Manual;
+            //CLAYUI_OnAnimation((IntPtr)0, 0, 2, 1, 0);
+            //MainParent.Redraw(handle, 1);
             frm.Show();
         }
 
@@ -248,33 +285,33 @@ namespace MtuConsole
 
         private void MainParent_Load(object sender, EventArgs e)
         {
-            IntPtr handle = this.Handle;
-           CLAYUI_CSharp_Init(handle);
+           // IntPtr handle = this.Handle;
+           //CLAYUI_CSharp_Init(handle);
         }
 
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
-        }
+        //protected override void WndProc(ref Message m)
+        //{
+        //    //base.WndProc(ref m);
+        //}
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            IntPtr handle = this.Handle;
-            if (m_isredraw == 1)
-                base.OnPaint(e);
+            //IntPtr handle = this.Handle;
+            //if (m_isredraw == 1)
+            //    base.OnPaint(e);
         }
 
         public void EnableControl(int isenable)
         {
             foreach (System.Windows.Forms.Control control in this.Controls)
             {
-               MainParent.WinRedraw(control.Handle, isenable);
+               //MainParent.WinRedraw(control.Handle, isenable);
             }
         }
 
         private void MainParent_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CLAYUI_CSharp_Release();
+            //CLAYUI_CSharp_Release();
         }
 
         private void MainParent_Shown(object sender, EventArgs e)
@@ -283,6 +320,11 @@ namespace MtuConsole
         }
 
         private void MainParent_ResizeEnd(object sender, EventArgs e)
+        {
+
+        }
+
+        private void statusStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }

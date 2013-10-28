@@ -5,6 +5,8 @@ using System.Text;
 
 namespace MtuConsole.Common
 {
+
+    
     /// <summary>
     /// 接收通道抛出消息事件
     /// </summary>
@@ -26,6 +28,7 @@ namespace MtuConsole.Common
         {
             SendMsg(msg);
         }
+        
     }
 
     /// <summary>
@@ -79,6 +82,15 @@ namespace MtuConsole.Common
            set;
        }
 
+       public override string ToString()
+       {
+
+          string result=string.Empty;
+
+           result=this.Type.ToString() + this.Body.ToString();
+
+           return result;
+       }
         #endregion
     }
 
@@ -108,6 +120,22 @@ namespace MtuConsole.Common
            get;
            set;
        }
+       public override string ToString()
+       {
+           string result = "";
+           Type type = this.GetType();
+           foreach (System.Reflection.PropertyInfo PInfo in type.GetProperties())
+           {
+               //用PInfo.GetValue获得值 
+               string val = Convert.ToString(PInfo.GetValue(this, null));
+               //获得属性的名字,后面就可以根据名字判断来进行些自己想要的操作 
+               string name = PInfo.Name;
+
+               result += name + "=" + val + ";" + Environment.NewLine;
+           }
+
+           return result;
+       }
    }
 
    /// <summary>
@@ -129,6 +157,22 @@ namespace MtuConsole.Common
        {
            get;
            set;
+       }
+       public override string ToString()
+       {
+           string result = "";
+           Type type = this.GetType();
+           foreach (System.Reflection.PropertyInfo PInfo in type.GetProperties())
+           {
+               //用PInfo.GetValue获得值 
+               string val = Convert.ToString(PInfo.GetValue(this, null));
+               //获得属性的名字,后面就可以根据名字判断来进行些自己想要的操作 
+               string name = PInfo.Name;
+
+               result += name + "=" + val + ";" + Environment.NewLine;
+           }
+
+           return result;
        }
    }
 
@@ -155,6 +199,22 @@ namespace MtuConsole.Common
        {
            get;
            set;
+       }
+       public override string ToString()
+       {
+           string result = "";
+           Type type = this.GetType();
+           foreach (System.Reflection.PropertyInfo PInfo in type.GetProperties())
+           {
+               //用PInfo.GetValue获得值 
+               string val = Convert.ToString(PInfo.GetValue(this, null));
+               //获得属性的名字,后面就可以根据名字判断来进行些自己想要的操作 
+               string name = PInfo.Name;
+
+               result += name + "=" + val + ";" + Environment.NewLine;
+           }
+
+           return result;
        }
    }
 
@@ -197,6 +257,34 @@ namespace MtuConsole.Common
        {
            get;
            set;
+       }
+       public override string ToString()
+       {
+           string result = "";
+           Type type = this.GetType();
+           foreach (System.Reflection.PropertyInfo PInfo in type.GetProperties())
+           {
+               //用PInfo.GetValue获得值 
+               string val = Convert.ToString(PInfo.GetValue(this, null));
+               //获得属性的名字,后面就可以根据名字判断来进行些自己想要的操作 
+               string name = PInfo.Name;
+
+               if (name == "Items")
+               {
+                   result = result + "Items=";
+                   foreach (MeasureValue v in Items.GetAllItems())
+                   {
+                       result = result + v.Datetime.ToString() + " " + v.OriginalValue + " ";
+                   }
+
+               }
+               else
+               {
+                   result += name + "=" + val + ";" + Environment.NewLine;
+               }
+           }
+
+           return result;
        }
    }
 
