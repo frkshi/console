@@ -25,7 +25,7 @@ namespace MtuConsole.TcpProcess
     {
 
         #region 变量
-        const int PORT = 1000;
+        
         const int COMMUNICATION_THREAD_MAX = 12;
         private MtuLog _servicelog;
         private RWDatabase _rwDatabase = new RWDatabase();
@@ -239,7 +239,7 @@ namespace MtuConsole.TcpProcess
 
             Thread.Sleep(500);
             //等待其他线程池空
-            WaitHandle.WaitAll(_commdoneEvents);
+           WaitHandle.WaitAll(_commdoneEvents);
 
             //////////////////////////////////////////////////////////////////////////
             // bug, _rwDatabase is belong to service control ,should not dispose here.affect other processcontol
@@ -354,7 +354,7 @@ namespace MtuConsole.TcpProcess
                 _processControlPropties.CheckTimeMidNight = true;
                 _processControlPropties.EnableAirPressure =false;
                 _processControlPropties.NeedReply = true;
-                _processControlPropties.TcpPort = PORT;
+                _processControlPropties.TcpPort =Convert.ToInt16( ConfigureAppConfig.GetAppSettingsKeyValue("listenport")); //PORT;
 
 
 

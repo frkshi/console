@@ -68,6 +68,7 @@ namespace MtuConsole
             
                 _sc.Commandsend_ResetProcessControl("1", enable);
                 CommunicationEnable = enable;
+                ConfigureAppConfig.AppSettingsSave("communicationenable", CommunicationEnable ? "true" : "false");
             
         }
         public MainParent()
@@ -135,7 +136,7 @@ namespace MtuConsole
                     
                     break;
                 case "frm_DeviceSetting":
-                    result = new frm_DeviceSetting();
+                    result = new frm_DeviceSetting(_rwdata,this);
                     break;
                 case "frm_deviceReg":
                     result = new frm_deviceReg();
@@ -191,16 +192,7 @@ namespace MtuConsole
     
         }
 
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-            if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                string FileName = saveFileDialog.FileName;
-            }
-        }
+       
 
         private void ExitToolsStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -312,6 +304,7 @@ namespace MtuConsole
         private void MainParent_FormClosed(object sender, FormClosedEventArgs e)
         {
             //CLAYUI_CSharp_Release();
+            _sc.ExitInstance();
         }
 
         private void MainParent_Shown(object sender, EventArgs e)

@@ -68,6 +68,12 @@
     <Compile Include="Control\StatusIndicator.designer.cs">
       <DependentUpon>StatusIndicator.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeviceEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeviceEdit.Designer.cs">
+      <DependentUpon>DeviceEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_CommunicationMonitor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     <Compile Include="View\IRtuStatusView.cs" />
     <EmbeddedResource Include="Control\RtuStatus.resx">
       <DependentUpon>RtuStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeviceEdit.resx">
+      <DependentUpon>DeviceEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_CommunicationMonitor.resx">
       <DependentUpon>frm_CommunicationMonitor.cs</DependentUpon>

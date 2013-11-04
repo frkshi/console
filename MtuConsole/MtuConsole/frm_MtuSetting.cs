@@ -24,6 +24,7 @@ namespace MtuConsole
             InitializeComponent();
         }
 
+       
         public frm_MtuSetting(RWDatabase rw,MainParent parent)
         {
             _rwdata = rw;
@@ -144,6 +145,9 @@ namespace MtuConsole
           
             
             _rwdata.LocalSettingManager.UpdateCommunicationSetting(entity);
+
+            ConfigureAppConfig.AppSettingsSave("listenport", txt_listenport.Text);
+           
         }
 
         private void Btn_Quit_Click(object sender, EventArgs e)

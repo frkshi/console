@@ -35,10 +35,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Btn_Quit = new System.Windows.Forms.Button();
-            this.Txt_APN = new System.Windows.Forms.TextBox();
-            this.Txt_IP = new System.Windows.Forms.TextBox();
             this.Txt_Port = new System.Windows.Forms.TextBox();
+            this.Txt_IP = new System.Windows.Forms.TextBox();
+            this.Txt_APN = new System.Windows.Forms.TextBox();
+            this.Btn_Quit = new System.Windows.Forms.Button();
             this.btn_OK = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_listenport = new System.Windows.Forms.TextBox();
@@ -97,10 +97,31 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(348, 124);
+            this.groupBox1.Size = new System.Drawing.Size(348, 145);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "设备通讯参数";
+            // 
+            // Txt_Port
+            // 
+            this.Txt_Port.Location = new System.Drawing.Point(61, 86);
+            this.Txt_Port.Name = "Txt_Port";
+            this.Txt_Port.Size = new System.Drawing.Size(208, 21);
+            this.Txt_Port.TabIndex = 8;
+            // 
+            // Txt_IP
+            // 
+            this.Txt_IP.Location = new System.Drawing.Point(61, 53);
+            this.Txt_IP.Name = "Txt_IP";
+            this.Txt_IP.Size = new System.Drawing.Size(208, 21);
+            this.Txt_IP.TabIndex = 7;
+            // 
+            // Txt_APN
+            // 
+            this.Txt_APN.Location = new System.Drawing.Point(61, 20);
+            this.Txt_APN.Name = "Txt_APN";
+            this.Txt_APN.Size = new System.Drawing.Size(208, 21);
+            this.Txt_APN.TabIndex = 6;
             // 
             // Btn_Quit
             // 
@@ -112,30 +133,9 @@
             this.Btn_Quit.UseVisualStyleBackColor = true;
             this.Btn_Quit.Click += new System.EventHandler(this.Btn_Quit_Click);
             // 
-            // Txt_APN
-            // 
-            this.Txt_APN.Location = new System.Drawing.Point(61, 20);
-            this.Txt_APN.Name = "Txt_APN";
-            this.Txt_APN.Size = new System.Drawing.Size(208, 21);
-            this.Txt_APN.TabIndex = 6;
-            // 
-            // Txt_IP
-            // 
-            this.Txt_IP.Location = new System.Drawing.Point(61, 53);
-            this.Txt_IP.Name = "Txt_IP";
-            this.Txt_IP.Size = new System.Drawing.Size(208, 21);
-            this.Txt_IP.TabIndex = 7;
-            // 
-            // Txt_Port
-            // 
-            this.Txt_Port.Location = new System.Drawing.Point(61, 86);
-            this.Txt_Port.Name = "Txt_Port";
-            this.Txt_Port.Size = new System.Drawing.Size(208, 21);
-            this.Txt_Port.TabIndex = 8;
-            // 
             // btn_OK
             // 
-            this.btn_OK.Location = new System.Drawing.Point(204, 244);
+            this.btn_OK.Location = new System.Drawing.Point(206, 244);
             this.btn_OK.Name = "btn_OK";
             this.btn_OK.Size = new System.Drawing.Size(75, 23);
             this.btn_OK.TabIndex = 6;
@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 290);
+            this.ClientSize = new System.Drawing.Size(385, 291);
             this.Controls.Add(this.txt_listenport);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btn_OK);
