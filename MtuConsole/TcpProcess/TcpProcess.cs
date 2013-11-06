@@ -239,7 +239,7 @@ namespace MtuConsole.TcpProcess
 
             Thread.Sleep(500);
             //等待其他线程池空
-           WaitHandle.WaitAll(_commdoneEvents);
+         //  WaitHandle.WaitAll(_commdoneEvents);
 
             //////////////////////////////////////////////////////////////////////////
             // bug, _rwDatabase is belong to service control ,should not dispose here.affect other processcontol

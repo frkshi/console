@@ -15,6 +15,15 @@ using MtuConsole.Common;
 
 namespace MtuConsole
 {
+    public class DeviceParameter
+    {
+        public string rtuid;
+        public string rtuname;
+        public string scale;
+        public string offset;
+        public string savecycle;
+        public string sendcycle;
+    }
     public partial class DeviceEdit : Form
     {
 
@@ -31,6 +40,24 @@ namespace MtuConsole
             _rwdata = rw;
             InitializeComponent();
         }
+        public void SetRtuID(string rtuid)
+        {
+            txt_rtuid.Enabled = true;
+            txt_rtuid.Text = rtuid;
+        }
+        public void SetForm(DeviceParameter parameter)
+        {
+            txt_rtuid.Enabled = false;
+            txt_rtuid.Text = parameter.rtuid;
+            txt_rtuname.Text = parameter.rtuname;
+            txt_savecycle.Text = parameter.savecycle;
+            txt_sendcycle.Text = parameter.sendcycle;
+            txt_scale.Text = parameter.scale;
+            txt_offset.Text = parameter.offset;
+        
+        
+        }
+
         private void btn_ok_Click(object sender, EventArgs e)
         {
             Save();
@@ -50,7 +77,7 @@ namespace MtuConsole
                 rtusetting.RTUName = txt_rtuname.Text;
                 rtusetting.SaveCycle = Convert.ToInt32(txt_savecycle.Text);
                 rtusetting.SendCycle = Convert.ToInt32(txt_sendcycle.Text);
-
+                rtusetting.ProductTypeId = "Datalog";
 
 
                 MeasureSetting measuresetting = new MeasureSetting();
@@ -62,11 +89,17 @@ namespace MtuConsole
                     measuresetting.RTUId = txt_rtuid.Text;
                     measuresetting.Scale = Convert.ToDecimal(txt_scale.Text);
                     measuresetting.Offset = Convert.ToDecimal(txt_offset.Text);
+
+
+
+                    _rwdata.LocalSettingManager.UpdateRTUSetting(rtusetting);
+
+                    _rwdata.LocalSettingManager.UpdateMeasureSetting(measuresetting);
                     result = true;
                 }
                 else
                 {
-                   result= Addnew();
+                    result = Addnew(rtusetting);
                     
                 }
 
@@ -83,17 +116,28 @@ namespace MtuConsole
 
 
 
-        private bool Addnew()
+        private bool Addnew(RTUSetting rtusetting)
         {
             bool result = false;
 
             try
             {
-                RTUSetting rtusetting = new RTUSetting();
+              
 
                 //成功插入新设备后，获取所属measuresetting
                 if (_rwdata.LocalSettingManager.InsertRTUSetting(rtusetting))
                 {
+                    List<MeasureTemplet> mtlist = _rwdata.LocalSettingManager.LoadMeasureTemplet(rtusetting.ProductTypeId);
+                    List<MeasureSetting> mslist = new List<MeasureSetting>();
+                    foreach (MeasureTemplet mt in mtlist)
+                    {
+                        MeasureSetting tmpms = new MeasureSetting(mt);
+                        tmpms.RTUId = rtusetting.RTUId;
+                        mslist.Add(tmpms);
+
+                    }
+                    _rwdata.LocalSettingManager.BulkInsertMeasureSetting(mslist);
+
                     DataTable dt = _rwdata.LocalSettingManager.LoadMeasureSetting();
                     DataRow[] drs = dt.Select("rtuid='" + rtusetting.RTUId + "' and datatype='01'");
                     if (drs.Length > 0)

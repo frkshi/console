@@ -187,7 +187,7 @@ namespace MtuConsole.ProcessManager
 
             _rwDatabase = null;
             _servicelog = null;
-            //    System.Environment.Exit(0);
+                //System.Environment.Exit(0);
 
 
 

@@ -23,6 +23,7 @@ namespace MtuConsole
                 //app.GetService<IViewService>().Navigate(Views.Main);
 
                 Application.Run(new MainParent());
+                System.Environment.Exit(0);
             }
         }
     }

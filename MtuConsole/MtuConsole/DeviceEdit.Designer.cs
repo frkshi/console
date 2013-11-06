@@ -141,7 +141,6 @@
             // 
             // txt_rtuid
             // 
-            this.txt_rtuid.Enabled = false;
             this.txt_rtuid.Location = new System.Drawing.Point(84, 31);
             this.txt_rtuid.Name = "txt_rtuid";
             this.txt_rtuid.Size = new System.Drawing.Size(203, 21);

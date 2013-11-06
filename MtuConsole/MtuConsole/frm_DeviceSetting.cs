@@ -159,5 +159,29 @@ namespace MtuConsole
         {
             this.Close();
         }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count > 1 && dataGridView1.SelectedRows.Count > 0)
+            {
+                DeviceEdit frm_deviceedit = new DeviceEdit(_rwdata);
+                DeviceParameter parameter = new DeviceParameter();
+                parameter.rtuid = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                parameter.rtuname = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                parameter.savecycle = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+                parameter.sendcycle = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+                parameter.scale = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+                parameter.offset= dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
+
+
+                frm_deviceedit.SetForm(parameter);
+                DialogResult result = frm_deviceedit.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    RefreshGrid();
+                }
+
+            }
+        }
     }
 }
