@@ -88,9 +88,11 @@ namespace MtuConsole.TcpProcess
                 tmpbody.RtuId = rtuid;
                 originalMessageSend = true;
                 List<Message> sendmsgs = TransArray2String(resultArray, dataType, rtuid);
+
+
                 if (sendmsgs != null)
                 {
-                    sendtoapiobj.Send(sendmsgs);
+                    sendtoapiobj.Send(sendmsgs, commMsg.Msg);
                 }
                 doneEvent.Set();
             }
@@ -155,6 +157,7 @@ namespace MtuConsole.TcpProcess
                 SavetoDB(resultArray, dataType, rtuid);
                 sendtoapiobj.Send(TransArray2String(resultArray, dataType, rtuid));
                 tmpbody.RtuId = rtuid;
+                
                 sendtoapiobj.Send(apimsg);  //原始数据
                 originalMessageSend = true;
                 doneEvent.Set();

@@ -55,7 +55,7 @@ namespace MtuConsole
         private RWDatabase _rwdata;
         ServiceControl _sc;
         private bool _communicationenable;
-
+        MessageCenter _msgcenter;
         public bool CommunicationEnable
         {
             get { return _communicationenable; }
@@ -81,9 +81,9 @@ namespace MtuConsole
         private void ini()
         {
             log4net.Config.XmlConfigurator.Configure();
-            MessageCenter msgcenter = new MessageCenter();
+            _msgcenter = new MessageCenter();
 
-             _sc = new ServiceControl(msgcenter.MessageHost);
+            _sc = new ServiceControl(_msgcenter.MessageHost);
 
             _sc.CreateInstance();
             _rwdata = _sc.Rwdata;
@@ -142,7 +142,7 @@ namespace MtuConsole
                     result = new frm_deviceReg();
                     break;
                 case "frm_DataMonitor":
-                    result = new frm_DataMonitor();
+                    result = new frm_DataMonitor(_msgcenter);
                     break;
                 case "frm_CommunicationMonitor":
                     result = new frm_CommunicationMonitor();

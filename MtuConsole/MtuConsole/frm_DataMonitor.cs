@@ -17,13 +17,50 @@ namespace MtuConsole
         
         public delegate void HandleListShowMsg(ListMessage value);
         private HandleListShowMsg intertacShowMsg;
-        
-   
+
+        private MessageCenter _msgcenter;
         public frm_DataMonitor()
         {
             InitializeComponent();
         }
-      
+
+        public frm_DataMonitor(MessageCenter msgcenter)
+        {
+            _msgcenter = msgcenter;
+            _msgcenter.Onreceivemsg += _msgcenter_Onreceivemsg;
+            InitializeComponent();
+        }
+
+        void _msgcenter_Onreceivemsg(Common.Message objMessage)
+        {
+            WriteMsg(new ListMessage { Content = objMessage.OriginString.ToString(), Direct = "收到", Encode = EncodeMessage(objMessage), time = DateTime.Now });
+        }
+
+        private string EncodeMessage(Common.Message objmessage)
+        {
+            string result = string.Empty;
+            Common.MeasureMessageBody body;
+            try
+            {
+                body = (Common.MeasureMessageBody)objmessage.Body;
+            }
+            catch
+            {
+                return "";
+            }
+
+            result = result + "rtuid=" + body.RtuId + ";";
+            result = result + "measurename=" + body.MeasureName + ";";
+            foreach (Common.MeasureValue item in body.Items.GetAllItems())
+            {
+               result=result +   item.Datetime.ToString() + " "+ item.OriginalValue.ToString() + ";";
+            }
+          
+
+
+            return result;
+        
+        }
         private void toolStripMenuItemCopy_Click(object sender, EventArgs e)
         {
             if (listView1.SelectedIndices != null && listView1.SelectedIndices.Count > 0)

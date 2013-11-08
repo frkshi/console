@@ -185,5 +185,22 @@ namespace MtuConsole.TcpProcess
             return result;
 
         }
+        /// <summary>
+        /// 发送命令
+        /// </summary>
+        /// <param name="msgs"></param>
+        /// <returns></returns>
+        public bool Send(List<Message> msgs,string originstring)
+        {
+            bool result = true;
+            //待写，for case sDataType.MeasureDataPulseHour
+            foreach (Message msg in msgs)
+            {
+                msg.OriginString = originstring;
+                result = result & Send(msg);
+            }
+            return result;
+
+        }
     }
 }

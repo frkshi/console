@@ -81,7 +81,11 @@ namespace MtuConsole.Common
            get;
            set;
        }
-
+       public string OriginString
+       {
+           get;
+           set;
+       }
        public override string ToString()
        {
 
