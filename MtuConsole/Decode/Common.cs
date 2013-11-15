@@ -322,8 +322,9 @@ namespace Decode
                case "117"://压力突降报警值
                    value = DataTypeDatalog.D_117;
                    break;
-
-               
+               case "118"://压力突降消警
+                   value = DataTypeDatalog.D_118;
+                   break;
                case "230":
                    value = DataTypeDatalog.D_230;
                    break;

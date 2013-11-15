@@ -62,7 +62,7 @@ namespace Decode
                 case InfoType.Alert:
                     DecodeAlertInfo decodealert = new DecodeAlertInfo();
                     decodealert.MeasureSetting = _measuresetting;
-                    
+                    decodealert.RtuSetting = RtuSetting;
                     result = decodealert.Trans2ArrayList(sCode, out dataType, out Rtuid);
 
                     break;

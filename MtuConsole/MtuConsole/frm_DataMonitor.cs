@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;//.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+
 namespace MtuConsole
 {
     public partial class frm_DataMonitor : Form
@@ -39,22 +40,50 @@ namespace MtuConsole
         private string EncodeMessage(Common.Message objmessage)
         {
             string result = string.Empty;
-            Common.MeasureMessageBody body;
+            
+            
+          
             try
             {
-                body = (Common.MeasureMessageBody)objmessage.Body;
+                switch (objmessage.Body.GetType().Name)
+                { 
+                    case "MeasureMessageBody":
+                        Common.MeasureMessageBody body = new Common.MeasureMessageBody();
+                        body = (Common.MeasureMessageBody)objmessage.Body;
+                        result = result + "rtuid=" + body.RtuId + ";";
+                        result = result + "measurename=" + body.MeasureName + ";";
+                        foreach (Common.MeasureValue item in body.Items.GetAllItems())
+                        {
+                           result=result +   item.Datetime.ToString() + " "+ item.OriginalValue.ToString() + ";";
+                        }
+                        break;
+                    case "LimitAlertMessageBody":
+                    case "MutationAlertMessageBody":
+                        Common.MeasureAlertMessageBody alertbody = new Common.MeasureAlertMessageBody();
+                        alertbody = (Common.MeasureAlertMessageBody)objmessage.Body;
+                        result = result + "rtuid=" + alertbody.RtuId + ";";
+                        result = result + "measurename=" + alertbody.MeasureName + ";";
+
+                        result = objmessage.Body.GetType().Name=="LimitAlertMessageBody"?"[上下限报警]":"突变报警" + result;
+
+                        foreach (Common.AlertItem alertitem in alertbody.GetAllAlertValues())
+                        {
+                            result = result + alertitem.Time.ToString() + "," + alertitem.Value.ToString() + ";";
+                        }
+                        break;
+                    default:
+                        break;
+
+                }
+               // body = (Common.MeasureMessageBody)objmessage.Body;
+               
             }
             catch
             {
                 return "";
             }
 
-            result = result + "rtuid=" + body.RtuId + ";";
-            result = result + "measurename=" + body.MeasureName + ";";
-            foreach (Common.MeasureValue item in body.Items.GetAllItems())
-            {
-               result=result +   item.Datetime.ToString() + " "+ item.OriginalValue.ToString() + ";";
-            }
+           
           
 
 

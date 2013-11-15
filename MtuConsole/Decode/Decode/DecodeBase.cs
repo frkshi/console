@@ -223,8 +223,8 @@ namespace Decode
             switch (result.Infotype)
             { 
                 case InfoType.Alert:
-                    result.DataTag = Common.ConvertToDataType(framestring.Substring(15, 3));
-                    result.CollectDatas = GetAlertDatas(result.DataTag,framestring.Substring(16, framestring.Length - 16 - 3));
+                    result.DataTag = Common.ConvertToDataType(framestring.Substring(13, 3));
+                    result.CollectDatas = GetAlertDatas(result.TU, result.DataTag,framestring.Substring(16, framestring.Length - 16 - 3));
                     break;
                 case InfoType.Data:
                     result.DataTag=Common.ConvertToDataType(framestring.Substring(18,3));
@@ -249,18 +249,29 @@ namespace Decode
             return result;
         }
 
-        private List<CollectData> GetAlertDatas(DataTypeDatalog datatag, string datastring)
+        private List<CollectData> GetAlertDatas(string rtuid,DataTypeDatalog datatag, string datastring)
         {
             List<CollectData> result = new List<CollectData>();
             switch (datatag)
             { 
                 case DataTypeDatalog.D_111:
-                case DataTypeDatalog.D_113:
-                case DataTypeDatalog.D_115:
-                case DataTypeDatalog.D_117:
                 case DataTypeDatalog.D_112:
+                case DataTypeDatalog.D_113:
                 case DataTypeDatalog.D_114:
-                     int collcycle = -10;  //采集周期固定为10s
+                case DataTypeDatalog.D_115:
+                case DataTypeDatalog.D_116:
+                case DataTypeDatalog.D_117:
+                case DataTypeDatalog.D_118:
+                
+                     int collcycle = -30;  //采集周期固定为10s
+                    
+                    DataRow[] drs= RtuSetting.Select("rtuid='" + rtuid + "'");
+                    if (drs.Length > 0)
+                    {
+                        collcycle =Convert.ToInt32( drs[0]["collcycle"].ToString());
+                    }
+
+
                     result = GetFixLengthDatas(datastring,collcycle,4);
                     break;
                 default:
