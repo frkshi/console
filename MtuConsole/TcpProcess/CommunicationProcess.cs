@@ -311,7 +311,7 @@ namespace MtuConsole.TcpProcess
                         msgs.Add(apimsg);
                         break;
 
-                  
+
 
 
                     //case sDataType.QueryResponse://查询回复

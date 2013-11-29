@@ -482,8 +482,8 @@ namespace Decode
 
                    break;
                case DataTypeDatalog.D_010: // GPRS信息
-                   //APN+‘-’+IP1+‘-’+PORT1 +‘-’+IP2+‘-’+PORT2
-                   result = new string[] { "APN", "IP1", "PORT1" ,"IP2","PORT2"};
+                   //APN+‘-’+IP1+‘-’+PORT1
+                   result = new string[] { "APN", "IP1", "PORT1" };
                    
                    break;
              
@@ -497,10 +497,7 @@ namespace Decode
                    break;
 
            
-               case DataTypeDatalog.D_080: // 温度读取和温度校正
-                   result = new string[] { "温度" };
-                   
-                   break;
+             
 
                case DataTypeDatalog.D_090:
                    result = new string[] { "回差值" };
@@ -511,16 +508,19 @@ namespace Decode
                    result = new string[] { "系统运行状态" };
                    break;
               
-               case DataTypeDatalog.D_220: //硬件功能调试
-                   result = new string[] { "硬件功能调试" };
+          
+               case DataTypeDatalog.D_240: //使能位
+                   result = new string[] { "压力","上限报警有效","下限报警有效", "突升报警有效", "突降报警有效" };
                    break;
-               case DataTypeDatalog.D_240: //报警使能位 "报警有效", "上限值", "下限值", "突变变化值"
-                   result = new string[] { "上限报警有效","突变报警有效", "上限值", "下限值", "突变变化值" };
+
+               case DataTypeDatalog.D_250: //上下限值
+                   result = new string[] {"上限值","下限值" };
                    break;
-               
- 
-               case DataTypeDatalog.D_150: //时间- 场强+‘-’+电池剩余次数-终端连接次数
-                   result = new string[] { "时间","场强", "电池耗时","终端连接次数" };
+               case DataTypeDatalog.D_260: //突升突降变化率
+                   result = new string[] { "突升变化率","突降变化率" };
+                   break;
+               case DataTypeDatalog.D_150: //场强+‘-’+电池剩余次数
+                   result = new string[] { "场强", "电池耗时"};
                    break;
                case DataTypeDatalog.D_180: // 压力值
                    result = new string[] { "压力值" };
